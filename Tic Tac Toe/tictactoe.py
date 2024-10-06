@@ -59,6 +59,11 @@ def check_win(board,mark):
   else:
       return False
 
+def isBoardFull(board):
+  for i in board:
+    if i==' ':
+      return False
+  return True
 
 # Ask the player if he wants to continue or not ?
 def replay():
@@ -94,10 +99,17 @@ def play():
     
     print(f"It's Player {current_player} turn --- ")
     position =  player_input()
+
     board=place_the_marker(board, position, current_marker)
+
     if check_win(board,current_marker):
       print(f"Congrats, player {current_player} won !")
       display_board(board)
+      game_on = replay()
+      board = [' '] * 10
+      board[0] = '#'
+    elif isBoardFull(board):
+      print("Draw!")
       game_on = replay()
       board = [' '] * 10
       board[0] = '#'
